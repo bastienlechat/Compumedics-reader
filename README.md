@@ -1,2 +1,2 @@
-# cpm_reader
+# Compumedics reader
 Read compumedics raw files
