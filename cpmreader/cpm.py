@@ -2,11 +2,11 @@ import os, warnings
 import numpy as np
 import scipy.signal
 import pandas as pd
-from cpmreader.cpm_utils import _read_event, _read_technician_note, \
-    _read_sleep_stage, \
-    _read_data_segments,_read_header,_read_montage, _read_epoch_data,\
+from cpmreader.cpm_utils import read_event, read_technician_note, \
+    read_sleep_stage, \
+    read_data_segments,read_header,read_montage, read_epoch_data,\
     read_dat_data, read_d16_data, read_dat_discrete_data
-
+from cpmreader.utils import lights_is_wrong
 try:
     import mne
     MNE_INSTALLED=True
@@ -106,24 +106,23 @@ class PSGcompumedics:
     """
 
     def __init__(self,folder, lights_on_off = None):
-        super().__init__(folder)
         self.multiple_data_segment = False
         self._folder = folder
 
         # POLYSOMNOGRAPHY INFO
-        self.montage = _read_montage(folder)
+        self.montage = read_montage(folder)
         self.available_channel = list(self.montage.keys())
-        self.header = _read_header(folder)
-        self.data_segments = _read_data_segments(folder)
-        self._tech_notes = _read_technician_note(folder)
-        self._epoch_data = _read_epoch_data(folder)
+        self.header = read_header(folder)
+        self.data_segments = read_data_segments(folder)
+        self._tech_notes = read_technician_note(folder)
+        self._epoch_data = read_epoch_data(folder)
         self._epoch_length = int(self.header['EpochLength'])
-        self._stages = _read_sleep_stage(folder)
+        self._stages = read_sleep_stage(folder)
 
         if lights_on_off is None:
             self.lights_off, self.lights_on = self._find_lights()
 
-    def raw_data(self, include = 'all', detrend = True):
+    def raw_data(self, include = 'all', detrend = True, filter_baseline=True):
         """
         Reads PSG raw data and returns a dict.
 
@@ -160,11 +159,12 @@ class PSGcompumedics:
                     raise ValueError('Weird channel format: ' + ext)
 
                 if int(ch['Type']) == 1:
-                    data = scipy.signal.detrend(data)
-                    #data = mne.filter.filter_data(np.asarray(data,
-                    #                                        dtype='float'),
-                    #                                        ch_fs,l_freq=0.05,
-                    #                              h_freq=None, verbose='error')
+                    if detrend: data = scipy.signal.detrend(data)
+                    if filter_baseline:
+                        f2 = 0.05 / ch_fs
+                        b, a = scipy.signal.butter(2, [f2 * 2],
+                                                   btype='highpass')
+                        data = scipy.signal.filtfilt(b, a, data)
 
                 if 'DiscreteData' not in list(ch.keys()):
                     if len(self.data_segments)>1:
@@ -240,11 +240,11 @@ class PSGcompumedics:
             "EVT_LABEL", "EVT_TIME" and "EVT_LENGTH" and represents label,
             onset and duration of the onsets.
         """
-        _events = _read_event(self._folder)
+        _events = read_event(self._folder)
         return _events
 
     def _find_lights(self):
-        from ..utils import lights_is_wrong
+
         lights_off, lights_on = self._find_lights_from_tech_notes()
         if lights_is_wrong(lights_off, lights_on):
             if len(self._stages) > 0:

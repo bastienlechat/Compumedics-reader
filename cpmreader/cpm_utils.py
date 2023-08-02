@@ -106,7 +106,7 @@ def cpm_list_event():
     return event_list
 
 
-def _read_epoch_data(folder):
+def read_epoch_data(folder):
     """
     Read PROCESS.ADV file in the compumedics folder.
 
@@ -142,7 +142,7 @@ def _read_epoch_data(folder):
 
     return epochdata
 
-def _read_header(folder):
+def read_header(folder):
     """Reads compumedics header"""
     config_tree = ET.parse(os.path.join(folder, 'STUDYCFG.xml'))
     root = config_tree.getroot()
@@ -153,7 +153,7 @@ def _read_header(folder):
                 header[elem.tag] = elem.text
     return header
 
-def _read_montage(folder):
+def read_montage(folder):
     """Reads the mapping between channel name and file name"""
     config_tree = ET.parse(os.path.join(folder, 'STUDYCFG.xml'))
     root = config_tree.getroot()
@@ -173,7 +173,7 @@ def _read_montage(folder):
 
     return montage
 
-def _read_data_segments(folder):
+def read_data_segments(folder):
     """
     DATASEGMENTS.xml file contains the beginning and duration of each
     recording block. More than 1 recording block can happen if recording is
@@ -201,7 +201,7 @@ def _read_data_segments(folder):
                       'not yet tested')
     return segments
 
-def _read_event(folder):
+def read_event(folder):
     """
     Read events file. Sometime in 2020 compumedics shifted the storage file
     from .MDB to .EDB (a binary file). We haven't found a way of reading .MDB
@@ -227,7 +227,7 @@ def _read_event(folder):
 
     return events
 
-def _read_technician_note(folder):
+def read_technician_note(folder):
     """
     Read the "EventsSx.dat" file in a given compumedic folder.  EventsSx.dat
     is a binary file that should be structured in block of 600 bits.
@@ -289,7 +289,7 @@ def _read_technician_note(folder):
     return tech_notes
 
 
-def _is_staged(folder):
+def is_staged(folder):
     list_staging = sorted(glob.glob(os.path.join(folder, 'SLP*.DAT')),
                            key=os.path.getmtime)
 
@@ -300,7 +300,7 @@ def _is_staged(folder):
     else:
         return True, list_staging
 
-def _read_sleep_stage(folder):
+def read_sleep_stage(folder):
     """
     Read staging file from compumedics (uint8). It seems compumedics
     attributes uses the following mapping:
@@ -486,7 +486,7 @@ def read_dat_discrete_data(fname, sf):
         Values of the data
     """
     n = np.fromfile(fname, dtype=np.uint8).reshape(-1, 8)
-    t = n[:, 0:4].copy().view(np.int) / sf
+    t = n[:, 0:4].copy().view(int) / sf
     v = n[:, 4:8].copy().view(np.float32)
 
     return t.squeeze(), v.squeeze()
@@ -517,7 +517,7 @@ def read_d16_data(fname, sf):
     Notes
     -----
     For discontinuous recordings, one will have to pad with zeros the signal
-    using the different data segments. See _read_data_segments for more
+    using the different data segments. See read_data_segments for more
     information.
     """
     next_shape = 4 + 4 + 2 * sf

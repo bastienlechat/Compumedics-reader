@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Welcome to cpmreader’s documentation! &#8212; cpmreader 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=2389946f"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="welcome-to-cpmreader-s-documentation">
+<h1>Welcome to cpmreader’s documentation!<a class="headerlink" href="#welcome-to-cpmreader-s-documentation" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-cpmreader.cpm"></span><dl class="py class">
+<dt class="sig sig-object py" id="cpmreader.cpm.PSGcompumedics">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cpmreader.cpm.</span></span><span class="sig-name descname"><span class="pre">PSGcompumedics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lights_on_off</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm.PSGcompumedics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to read compumedics files</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cpmreader.cpm.PSGcompumedics.events">
+<span class="sig-name descname"><span class="pre">events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm.PSGcompumedics.events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads manual scoring of events (e.g. apneas and arousals).</p>
+<section id="returns">
+<h2>Returns<a class="headerlink" href="#returns" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>events<span class="classifier">pd.DataFrame</span></dt><dd><p>A dataframe containing events (e.g. apneas, arousals) informations.
+Each line corresponds to a different events. Dataframe keys are
+“EVT_LABEL”, “EVT_TIME” and “EVT_LENGTH” and represents label,
+onset and duration of the onsets.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cpmreader.cpm.PSGcompumedics.hypnogram">
+<span class="sig-name descname"><span class="pre">hypnogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm.PSGcompumedics.hypnogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads sleep staging informations.</p>
+<section id="id1">
+<h2>Returns<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>hypnogram<span class="classifier">pd.DataFrame</span></dt><dd><p>A dataframe with sleep staging (label, duration and onset)
+informations.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cpmreader.cpm.PSGcompumedics.posture">
+<span class="sig-name descname"><span class="pre">posture</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm.PSGcompumedics.posture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads posture information from compumedics files.</p>
+<section id="id2">
+<h2>Returns<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>posture<span class="classifier">pd.Dataframe</span></dt><dd><p>Dataframe containing posture informations for each epochs.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cpmreader.cpm.PSGcompumedics.raw_data">
+<span class="sig-name descname"><span class="pre">raw_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detrend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_baseline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm.PSGcompumedics.raw_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads PSG raw data and returns a dict.</p>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>include<span class="classifier">list or ‘all’</span></dt><dd><p>The list of channel to be loaded</p>
+</dd>
+<dt>detrend<span class="classifier">bool</span></dt><dd><p>If true, linear trend (offset values) will be removed using
+<a href="#id3"><span class="problematic" id="id4">:py:`scipy.signal.detrends`</span></a></p>
+</dd>
+</dl>
+</section>
+<section id="id5">
+<h2>Returns<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>raw<span class="classifier">dict</span></dt><dd><p>Data. Keys and values will depend on the channels (discrete vs
+continuous)</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm.cpm_what_channels">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm.</span></span><span class="sig-name descname"><span class="pre">cpm_what_channels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm.cpm_what_channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper functions to print available channels given a folder with
+polysomnography files</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm.read_psg_compumedics">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm.</span></span><span class="sig-name descname"><span class="pre">read_psg_compumedics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mne_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm.read_psg_compumedics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read compumedics raw files. This function was only tested for files
+recorded with Grael. Furthermore, data types may be different for older
+file. If an error occurs, consider exporting your data to .edf using
+profusion and use our :py:</p>
+<section id="id6">
+<h2>Parameters<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>folder<span class="classifier">str</span></dt><dd><p>path to the folder containing compumedics files</p>
+</dd>
+<dt>include<span class="classifier">list or ‘all’</span></dt><dd><p>The list of channel to be loaded</p>
+</dd>
+<dt>mne_output<span class="classifier">bool</span></dt><dd><p>If True (default), will output raw data as a <code class="xref py py-class docutils literal notranslate"><span class="pre">mne.io.BaseRaw</span></code>
+object. If False, will return a dict.</p>
+</dd>
+<dt>resample<span class="classifier">bool</span></dt><dd><p>If True, all channels will be resampled to “sf” frequency.</p>
+</dd>
+<dt>sf<span class="classifier">int</span></dt><dd><p>Sampling frequency to resample channels to (default 128).</p>
+</dd>
+</dl>
+</section>
+<section id="id7">
+<h2>Returns<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h2>
+<dl>
+<dt>raw<span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">mne.io.BaseRaw</span></code> or ‘dict</span></dt><dd><p>An MNE Raw instance if mne_output is True, else a dict containing
+informations about each channels + the data</p>
+</dd>
+<dt>hypnogram<span class="classifier">pd.DataFrame</span></dt><dd><p>A dataframe with sleep staging (label, duration and onset) informations.</p>
+</dd>
+<dt>events<span class="classifier">pd.DataFrame</span></dt><dd><p>A dataframe containing events (e.g. apneas, arousals) informations.
+Each line corresponds to a different events. Dataframe keys are
+“EVT_LABEL”, “EVT_TIME” and “EVT_LENGTH” and represents label,
+onset and duration of the onsets.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<span class="target" id="module-cpmreader.cpm_utils"></span><dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm_utils.read_EDB_event">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm_utils.</span></span><span class="sig-name descname"><span class="pre">read_EDB_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm_utils.read_EDB_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the .EDB event file in a given compumedic folder.  Events are stored
+in a binary file that should be structured in block of 40 bits.</p>
+<dl>
+<dt>Current guesses regarding block structure:</dt><dd><ul class="simple">
+<li><p>First 4 (1-4 assuming index=1) unsigned integers representing the</p></li>
+</ul>
+<p>events code
+- 4 to 8 is unknown
+- next 8 is a float representing event onset time
+- next 8 is a float representing event duration time
+- After that we are unsure of the structure. It seems the last bits
+is a integer that is a binary values for manual vs automatic scoring</p>
+</dd>
+</dl>
+<section id="id8">
+<h2>Parameters<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>folder<span class="classifier">str</span></dt><dd><p>Path of the compumedics folder</p>
+</dd>
+</dl>
+</section>
+<section id="id9">
+<h2>Returns<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>eventsframe<span class="classifier">pd.DataFrame</span></dt><dd><p>Dataframe containing events scoring</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm_utils.read_MDB_event">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm_utils.</span></span><span class="sig-name descname"><span class="pre">read_MDB_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm_utils.read_MDB_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the .MDB event file in a given compumedic folder.</p>
+<section id="id10">
+<h2>Parameters<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>folder<span class="classifier">str</span></dt><dd><p>Path of the compumedics folder</p>
+</dd>
+</dl>
+</section>
+<section id="id11">
+<h2>Returns<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>eventsframe<span class="classifier">pd.DataFrame</span></dt><dd><p>Dataframe containing events scoring</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm_utils.read_d16_data">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm_utils.</span></span><span class="sig-name descname"><span class="pre">read_d16_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm_utils.read_d16_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the .D16 raw data file in a given compumedic folder. “.D16” files are
+coded using some kind of lossy compression that uses the first bits to
+store a scale/offset as floats and subsequent datapoints as integer.
+Integers are then rescale using the scale/offset.</p>
+<p>The block size depends on the sampling frequency of the signal. and
+corresponds to a 1 seconds block size (of int16) + 8 bits (4 for scale
+and 4 for offset)</p>
+<section id="id12">
+<h2>Parameters<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>fname<span class="classifier">str</span></dt><dd><p>file to read</p>
+</dd>
+<dt>sf<span class="classifier">int</span></dt><dd><p>Sampling frequency</p>
+</dd>
+</dl>
+</section>
+<section id="id13">
+<h2>Returns<a class="headerlink" href="#id13" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>signal<span class="classifier">np.array</span></dt><dd><p>the signal</p>
+</dd>
+</dl>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">¶</a></h2>
+<p>For discontinuous recordings, one will have to pad with zeros the signal
+using the different data segments. See read_data_segments for more
+information.</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm_utils.read_dat_data">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm_utils.</span></span><span class="sig-name descname"><span class="pre">read_dat_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm_utils.read_dat_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>.DAT files are raw data stored without any compression. This was how most
+of the data was stored before introducing the .d16 format.</p>
+<section id="id14">
+<h2>Parameters<a class="headerlink" href="#id14" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>fname<span class="classifier">str</span></dt><dd><p>file to read</p>
+</dd>
+</dl>
+</section>
+<section id="id15">
+<h2>Returns<a class="headerlink" href="#id15" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>signal<span class="classifier">np.array</span></dt><dd><p>the data</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm_utils.read_dat_discrete_data">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm_utils.</span></span><span class="sig-name descname"><span class="pre">read_dat_discrete_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm_utils.read_dat_discrete_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>.DAT discrete files are used to store data such as heart rate, which are
+not necessarily continuous in time. These are stored in block of 8 where
+the first 4 bits represents the time (in points) of the data and the next
+8 represents the actual values.</p>
+<section id="id16">
+<h2>Parameters<a class="headerlink" href="#id16" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>fname<span class="classifier">str</span></dt><dd><p>file to read</p>
+</dd>
+<dt>sf<span class="classifier">int</span></dt><dd><p>Sampling frequency</p>
+</dd>
+</dl>
+</section>
+<section id="id17">
+<h2>Returns<a class="headerlink" href="#id17" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>t<span class="classifier">np.array</span></dt><dd><p>Timing of the data (in seconds)</p>
+</dd>
+<dt>v<span class="classifier">np.array</span></dt><dd><p>Values of the data</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm_utils.read_data_segments">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm_utils.</span></span><span class="sig-name descname"><span class="pre">read_data_segments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm_utils.read_data_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>DATASEGMENTS.xml file contains the beginning and duration of each
+recording block. More than 1 recording block can happen if recording is
+discontinued during the night (e.g. grael box is removed from recording
+system).
+Start and duration of each recording blocks is useful to 0-pad signals
+when recording was discontinued (gap between segments).</p>
+<section id="id18">
+<h2>Returns<a class="headerlink" href="#id18" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>raw<span class="classifier">list of dict</span></dt><dd><p>For each block, a dict is created with the following
+keys: “Start”, “Duration”, “VideoServer”, “VideoID”</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm_utils.read_epoch_data">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm_utils.</span></span><span class="sig-name descname"><span class="pre">read_epoch_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm_utils.read_epoch_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read PROCESS.ADV file in the compumedics folder.</p>
+<p>Compumedics automatically run some epochs level analysis when recording (or
+maybe when closing file?) such as spindles detection etc.. which is then
+saved in Process.ADV file.</p>
+<section id="id19">
+<h2>Returns<a class="headerlink" href="#id19" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>epochdata<span class="classifier">pd.DataFrame</span></dt><dd><p>30-seconds epoch-level of summary data (e.g. heart rate)</p>
+</dd>
+</dl>
+</section>
+<section id="id20">
+<h2>Notes<a class="headerlink" href="#id20" title="Permalink to this heading">¶</a></h2>
+<p>Some parameters (e.g. U15) have not yet been figured out.</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm_utils.read_event">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm_utils.</span></span><span class="sig-name descname"><span class="pre">read_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm_utils.read_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read events file. Sometime in 2020 compumedics shifted the storage file
+from .MDB to .EDB (a binary file). We haven’t found a way of reading .MDB
+file easily in python yet so only .EDB is supported.</p>
+<p>For file structure of .EDB, see “read_EDB_event” function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm_utils.read_header">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm_utils.</span></span><span class="sig-name descname"><span class="pre">read_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm_utils.read_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads compumedics header</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm_utils.read_montage">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm_utils.</span></span><span class="sig-name descname"><span class="pre">read_montage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm_utils.read_montage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the mapping between channel name and file name</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm_utils.read_sleep_stage">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm_utils.</span></span><span class="sig-name descname"><span class="pre">read_sleep_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm_utils.read_sleep_stage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read staging file from compumedics (uint8). It seems compumedics
+attributes uses the following mapping:</p>
+<blockquote>
+<div><p>[Stage]
+0= Unscored file
+1=1
+2=2
+3=3
+4=4
+5=REM
+10=Wake
+128=Unsure?
+138=Unscored?</p>
+</div></blockquote>
+<p>To be consistent with the way compumedics export their hypnogram in .xml
+(during .edf export), the following code are modified within this function:</p>
+<blockquote>
+<div><p>0 is changed to -1 (Unscored to -1)
+10 is changed to 0 (Wake = 0)
+128 is changed to 0 (Unsure is changed to 9, which is the code
+used to signify unscored in the .xml I think)
+138 is changed to 9 (Unscored? is changed to wake*)</p>
+</div></blockquote>
+<section id="id21">
+<h2>Parameters<a class="headerlink" href="#id21" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>folder<span class="classifier">str</span></dt><dd><p>path to compumedics folder</p>
+</dd>
+</dl>
+</section>
+<section id="id22">
+<h2>Returns<a class="headerlink" href="#id22" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>hypno<span class="classifier">array (n)</span></dt><dd><p>sleep stage hypnogram</p>
+</dd>
+</dl>
+</section>
+<section id="id23">
+<h2>Notes<a class="headerlink" href="#id23" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>This seems like a strange choice, but this was deduce based on comparison</p></li>
+</ul>
+<p>between hypnogram in native compumedics format (read here) and the
+corresponding .xml exported using profusion 4.</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cpmreader.cpm_utils.read_technician_note">
+<span class="sig-prename descclassname"><span class="pre">cpmreader.cpm_utils.</span></span><span class="sig-name descname"><span class="pre">read_technician_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpmreader.cpm_utils.read_technician_note" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the “EventsSx.dat” file in a given compumedic folder.  EventsSx.dat
+is a binary file that should be structured in block of 600 bits.</p>
+<dl>
+<dt>Current guesses regarding block structure:</dt><dd><ul class="simple">
+<li><p>First 4 (1-4 assuming index=1) bytes might be padding/zeros –</p></li>
+</ul>
+<p>perhaps a long integer? (seems always to be 0)
+- Next 4 (5-9) maybe also a long integer with various numbers like 1,</p>
+<blockquote>
+<div><p>15, 6, 26 etc (it seems 15 is for trace property and 1 for tech notes)</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Next 8 (9-16) is the time stamp (double precision)</p></li>
+<li><p>Next 8 (17-24) unknown.</p></li>
+<li><p>from 24 to 600: These bytes are reserved for text</p></li>
+</ul>
+</dd>
+</dl>
+<section id="id24">
+<h2>Parameters<a class="headerlink" href="#id24" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>folder<span class="classifier">str</span></dt><dd><p>Path of the compumedics folder</p>
+</dd>
+</dl>
+</section>
+<section id="id25">
+<h2>Returns<a class="headerlink" href="#id25" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>tech_notes<span class="classifier">dict</span></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>onset<span class="classifier">array</span></dt><dd><p>Time (in seconds from the beginning) of the technician
+notes</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>event: str</dt><dd><p>Corresponding event label</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="id26">
+<h2>Notes<a class="headerlink" href="#id26" title="Permalink to this heading">¶</a></h2>
+<p>The structure described above does not work for some byte blocks. I think
+there is different file structure when techs are checking impedances. All
+technician notes (including user defined one) are coded according to the
+structure described above (this has been tested).</p>
+</section>
+</dd></dl>
+
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">cpmreader</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Bastien Lechat.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

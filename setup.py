@@ -8,7 +8,7 @@ setup(
     author='Bastien Lechat',
     author_email='shudson@anl.gov',
     license='BSD 2-clause',
-    packages=['pyexample'],
+    packages=['cpmreader'],
     install_requires=['numpy',
                       'scipy',
                       'pandas',
