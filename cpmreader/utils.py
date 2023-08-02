@@ -1,6 +1,4 @@
 from xml.etree import cElementTree as ElementTree
-
-
 def lights_is_wrong(lights_off, lights_on):
 
     if lights_off is not None and lights_on is not None:

@@ -33,7 +33,7 @@ folder = "path/to/your/compumedics/folder"
 available_channels = cpm_what_channels(folder)
 
 #only load EEG channel C3 C4 and ref channels
-raw,hypnogram,events = read_psg_compumedics(folder=folder,
+raw, hypnogram, events = read_psg_compumedics(folder=folder,
                                             include=['C3','C4','M1','M2']
                                             mne_output=False)
 ```
